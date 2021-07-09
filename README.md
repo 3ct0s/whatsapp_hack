@@ -5,6 +5,15 @@ This program is for Educational purpose ONLY. Do not use it without permission. 
 
 ## Attack the victim
 
+Install hotspotd with these steps:
+``
+wget https://github.com/prahladyeri/hotspotd/raw/master/dist/hotspotd-latest.tar.gz
+tar xvf hotspotd-latest.tar.gz
+cd hotspotd-latest/
+sudo python setup.py install
+
+``
+
 - Step 1: Start WiFi hotspot on attacker machine and connect attacker phone to attacker SSID
 - Step 2: Start the PoC script (below) on attacker machine which is now acting as a router for attacker phone
 - Step 3: Call any whatsapp user randomly to capture the server IP addresses to filter
