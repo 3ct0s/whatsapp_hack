@@ -14,6 +14,9 @@ sudo python setup.py install
 ```
 
 - Step 1: Start WiFi hotspot on attacker machine and connect attacker phone to attacker SSID
+```
+sudo hotspotd start
+```
 - Step 2: Run the following commands:
  ```
  echo 1 > /proc/sys/net/ipv4/ip_forward
