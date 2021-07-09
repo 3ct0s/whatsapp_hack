@@ -14,6 +14,11 @@ sudo python setup.py install
 ```
 
 - Step 1: Start WiFi hotspot on attacker machine and connect attacker phone to attacker SSID
+- Step 2: Run the following commands:
+ ```
+ echo 1 > /proc/sys/net/ipv4/ip_forward
+ iptables -t nat -I POSTROUTING -j MASQUERADE
+ ```
 - Step 2: Start the PoC script (below) on attacker machine which is now acting as a router for attacker phone
 - Step 3: Call any whatsapp user randomly to capture the server IP addresses to filter
 - Step 4: Call victim on his whatsapp
