@@ -19,12 +19,12 @@ sudo python setup.py install
  echo 1 > /proc/sys/net/ipv4/ip_forward
  iptables -t nat -I POSTROUTING -j MASQUERADE
  ```
-- Step 2: Start the PoC script (below) on attacker machine which is now acting as a router for attacker phone
-- Step 3: Call any whatsapp user randomly to capture the server IP addresses to filter
-- Step 4: Call victim on his whatsapp
-- Step 5: Disconnect the call once established
-- Step 6: Script will reveal the public IP address of the target
-- Step 7: Validate the public IP address on target phone
+- Step 3: Start the PoC script (below) on attacker machine which is now acting as a router for attacker phone
+- Step 4: Call any whatsapp user randomly to capture the server IP addresses to filter
+- Step 5: Call victim on his whatsapp
+- Step 6: Disconnect the call once established
+- Step 7: Script will reveal the public IP address of the target
+- Step 8: Validate the public IP address on target phone
 
 ## Exploit
 
