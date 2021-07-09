@@ -9,9 +9,8 @@ Install hotspotd with these steps:
 ```
 wget https://github.com/prahladyeri/hotspotd/raw/master/dist/hotspotd-latest.tar.gz
 tar xvf hotspotd-latest.tar.gz
-cd hotspotd-latest/
+cd hotspotd-0.1.6/
 sudo python setup.py install
-
 ```
 
 - Step 1: Start WiFi hotspot on attacker machine and connect attacker phone to attacker SSID
