@@ -1,19 +1,39 @@
-#!/bin/sh
+#!/usr/bin/env python
+#@author: Prahlad Yeri
+#@description: Small daemon to create a wifi hotspot on linux
+#@license: MIT
+import os
+import sys  # Add this line
 
-filter=`tshark -i eth0 -T fields -f "udp" -e ip.dst -Y "ip.dst!=192.168.0.0/16 and ip.dst!=10.0.0.0/8 and ip.dst!=172.16.0.0/12" -c 100 |sort -u |xargs|sed "s/ / and ip.dst!=/g" |sed "s/^/ip.dst!=/g"`
+def uninstall_parts(package):
+    import shutil
+    # Rest of your code...
 
-echo "Press Enter and call your target."
 
-read line
+    paths_to_check = [
+        os.sep.join([sys.prefix, 'lib', 'python' + sys.version[:3], 'site-packages', package]),
+        os.sep.join([sys.prefix, 'lib', 'python' + sys.version[:3], 'dist-packages', package]),
+        os.sep.join(['/usr/local', 'lib', 'python' + sys.version[:3], 'site-packages', package]),
+        os.sep.join(['/usr/local', 'lib', 'python' + sys.version[:3], 'dist-packages', package]),
+    ]
 
-tshark -i eth0 -l -T fields -f "udp" -e ip.dst -Y "$filter" -Y "ip.dst!=192.168.0.0/16 and ip.dst!=10.0.0.0/8 and ip.dst!=172.16.0.0/12" | while read line 
-do 
-	whois $line > /tmp/b
+    for loc in paths_to_check:
+        if os.path.exists(loc):
+            print(f'Removing files from {loc}')
+            shutil.rmtree(loc, ignore_errors=False)
 
-	filter=`cat /tmp/b |xargs| egrep -iv "facebook|google"|wc -l`
+    binary_paths = ['/usr/local/bin/', '/usr/bin/']
+    for path in binary_paths:
+        binary_path = os.path.join(path, package)
+        if os.path.exists(binary_path):
+            print(f'Removing {("file", "link")[os.path.islink(binary_path)]}: {binary_path}')
+            try:
+                os.remove(binary_path)
+            except OSError as e:
+                print(f"Error removing {('file', 'link')[os.path.islink(binary_path)]}: {e}")
 
-	if [ "$filter" -gt 0 ] ; then 
-		targetinfo=`cat /tmp/b| egrep -iw "OrgName:|NetName:|Country:"` 
-		echo $line --- $targetinfo 
-	fi 
-done
+if 'uninstall' in sys.argv:
+    uninstall_parts('hotspotd')
+    print('Uninstall complete')
+    sys.exit(0)
+
