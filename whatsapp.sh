@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#@author: Prahlad Yeri
+#@author: tamersp25
 #@description: Small daemon to create a wifi hotspot on linux
 #@license: MIT
 import os
